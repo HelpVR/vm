@@ -45,5 +45,9 @@ void execute(uint16_t instruction) {
     printf("mod r%d r%d r%d\n", r1, r2, r3);
     reg[r1] = reg[r2] % reg[r3];
     break;
+  case 7:
+    printf("and r%d r%d r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] & reg[r3];
+    break;
   }
 }
