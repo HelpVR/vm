@@ -7,6 +7,8 @@
 extern uint16_t mem[ADDRESSES];
 extern uint16_t reg[REGISTERS];
 
+extern uint16_t acc;
+
 extern bool running;
 
 void execute(uint16_t instruction) {
@@ -18,36 +20,36 @@ void execute(uint16_t instruction) {
 
   switch (op) {
   case 0:
-    printf("halt\n");
+    printf("HLT\n");
     running = false;
     break;
   case 1:
-    printf("loadi r%d #%d\n", r1, imm);
+    printf("LDI R%d, #%d\n", r1, imm);
     reg[r1] = imm;
     break;
   case 2:
-    printf("add r%d r%d r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] + reg[r3];
+    printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] + reg[r3];
     break;
   case 3:
-    printf("sub r%d r%d r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] - reg[r3];
+    printf("SUB R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] - reg[r3];
     break;
   case 4:
-    printf("mul r%d r%d r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] * reg[r3];
+    printf("MUL R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] * reg[r3];
     break;
   case 5:
-    printf("div r%d r%d r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] / reg[r3];
+    printf("DIV R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] / reg[r3];
     break;
   case 6:
-    printf("mod r%d r%d r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] % reg[r3];
+    printf("MOD R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] % reg[r3];
     break;
   case 7:
-    printf("and r%d r%d r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] & reg[r3];
+    printf("AND R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] & reg[r3];
     break;
   }
 }
