@@ -12,44 +12,27 @@ extern uint16_t acc;
 extern bool running;
 
 void execute(uint16_t instruction) {
-  int op = (instruction & 0xf000) >> 12;
-  int r1 = (instruction & 0x0f00) >> 8;
-  int r2 = (instruction & 0x00f0) >> 4;
-  int r3 = (instruction & 0x000f);
-  int imm = (instruction & 0x00ff);
+  uint16_t op = (instruction & 0xf000) >> 12;
+  uint16_t r1 = (instruction & 0x0f00) >> 8;
+  uint16_t r2 = (instruction & 0x00f0) >> 4;
+  uint16_t r3 = (instruction & 0x000f);
+  uint16_t imm = (instruction & 0x00ff);
 
   switch (op) {
-  case 0:
-    printf("HLT\n");
-    running = false;
+  case NOP:
+    printf("NOP\n");
     break;
-  case 1:
+  case LDI:
     printf("LDI R%d, #%d\n", r1, imm);
     reg[r1] = imm;
     break;
-  case 2:
+  case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
     acc = reg[r1] = reg[r2] + reg[r3];
     break;
-  case 3:
-    printf("SUB R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] - reg[r3];
-    break;
-  case 4:
-    printf("MUL R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] * reg[r3];
-    break;
-  case 5:
-    printf("DIV R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] / reg[r3];
-    break;
-  case 6:
-    printf("MOD R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] % reg[r3];
-    break;
-  case 7:
-    printf("AND R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] & reg[r3];
+  case HLT:
+    printf("HLT\n");
+    running = false;
     break;
   }
 }
