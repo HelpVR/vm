@@ -1,4 +1,4 @@
-# vm
+# vm: work in progress
 
 ## System Specifications
 - 65536 Addresses (16-bit)
