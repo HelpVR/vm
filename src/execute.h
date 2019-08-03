@@ -2,4 +2,4 @@
 
 #include "core.h"
 
-void execute(uint16_t instruction);
+void execute(uint32_t instruction);

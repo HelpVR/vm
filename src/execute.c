@@ -4,19 +4,17 @@
 
 #include <stdio.h>
 
-extern uint16_t mem[ADDRESSES];
+extern uint32_t mem[ADDRESSES];
 extern uint16_t reg[REGISTERS];
-
-extern uint16_t acc;
 
 extern bool running;
 
-void execute(uint16_t instruction) {
-  uint16_t op = (instruction & 0xf000) >> 12;
-  uint16_t r1 = (instruction & 0x0f00) >> 8;
-  uint16_t r2 = (instruction & 0x00f0) >> 4;
-  uint16_t r3 = (instruction & 0x000f);
-  uint16_t imm = (instruction & 0x00ff);
+void execute(uint32_t instruction) {
+  uint16_t op = (instruction & 0xff000000) >> 24;
+  uint16_t r1 = (instruction & 0x00ff0000) >> 16;
+  uint16_t r2 = (instruction & 0x0000ff00) >> 8;
+  uint16_t r3 = (instruction & 0x000000ff);
+  uint16_t imm = (instruction & 0x000ffff);
 
   switch (op) {
   case NOP:
@@ -28,7 +26,7 @@ void execute(uint16_t instruction) {
     break;
   case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] + reg[r3];
+    reg[r1] = reg[r2] + reg[r3];
     break;
   case HLT:
     printf("HLT\n");
