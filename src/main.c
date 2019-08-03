@@ -19,7 +19,6 @@ int main() {
 
   mem[0x1000] = 0x0000ffff; // 0x0000ffff
   mem[0x1001] = 0x00000001; // 0x00000001
-
   mem[0x3000] = 0x10001000; // LDI R0, 0x1000
   mem[0x3001] = 0x10011001; // LDI R1, 0x1001
   mem[0x3002] = 0x50020001; // ADD R2, R0, R1
@@ -34,10 +33,13 @@ int main() {
     uint32_t instruction = fetch();
     execute(instruction);
     for (uint16_t ri = 0; ri < REGISTERS; ri++) {
-      printf("r%02d: 0x%08x ", ri, reg[ri]);
-      if ((ri + 1) % 4 == 0) printf("\n");
+      printf("[0x%08x]", reg[ri]);
+      if ((ri + 1) % 4 == 0) {
+        printf("\n");
+      } else {
+        printf(" ");
+      }
     }
-    printf("\n");
   }
 
   return 0;

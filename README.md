@@ -1,10 +1,14 @@
 # vm: work in progress
 
+[![CodeFactor](https://www.codefactor.io/repository/github/xorz57/vm/badge)](https://www.codefactor.io/repository/github/xorz57/vm)
+
 ## Example
 ```c
-  mem[0x3000] = 0x10000064; // LDI R0, #100
-  mem[0x3001] = 0x100100c8; // LDI R1, #200
-  mem[0x3002] = 0x30020001; // ADD R2, R0, R1
-  mem[0x3003] = 0x11030002; // LDR R3, R2
+  mem[0x1000] = 0x0000ffff; // 0x0000ffff
+  mem[0x1001] = 0x00000001; // 0x00000001
+  mem[0x3000] = 0x10001000; // LDI R0, 0x1000
+  mem[0x3001] = 0x10011001; // LDI R1, 0x1001
+  mem[0x3002] = 0x50020001; // ADD R2, R0, R1
+  mem[0x3003] = 0x20001003; // STR R2, 0x1003
   mem[0x3004] = 0xff000000; // HLT
 ```
