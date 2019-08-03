@@ -21,8 +21,16 @@ void execute(uint32_t instruction) {
     printf("NOP\n");
     break;
   case LDI:
-    printf("LDI R%d, #%d\n", r1, imm);
+    printf("LDI R%d, %d\n", r1, imm);
     reg[r1] = imm;
+    break;
+  case LDR:
+    printf("LDR R%d, R%d\n", r1, r3);
+    reg[r1] = reg[r3];
+    break;
+  case LDA:
+    printf("LDA R%d, %d\n", r1, imm);
+    reg[r1] = mem[imm];
     break;
   case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);

@@ -16,10 +16,11 @@ volatile sig_atomic_t signal_status;
 int main() {
   signal(SIGINT, signal_handler);
 
-  mem[0x3000] = 0x01000064; // LDI R0, #100
-  mem[0x3001] = 0x010100c8; // LDI R1, #200
-  mem[0x3002] = 0x02020001; // ADD R2, R0, R1
-  mem[0x3003] = 0x0f000000; // HLT
+  mem[0x3000] = 0x10000064; // LDI R0, #100
+  mem[0x3001] = 0x100100c8; // LDI R1, #200
+  mem[0x3002] = 0x20020001; // ADD R2, R0, R1
+  mem[0x3003] = 0x11030002; // LDR R3, R2
+  mem[0x3004] = 0xff000000; // HLT
 
   iar = 0x3000;
 
