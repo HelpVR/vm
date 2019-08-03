@@ -32,6 +32,10 @@ void execute(uint32_t instruction) {
     printf("LDA R%d, %d\n", r1, imm);
     reg[r1] = mem[imm];
     break;
+  case STR:
+    printf("STR R%d, %d\n", r1, imm);
+    mem[imm] = reg[r1];
+    break;
   case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
     reg[r1] = reg[r2] + reg[r3];

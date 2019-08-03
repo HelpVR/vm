@@ -10,5 +10,6 @@
 #define LDI 0x10
 #define LDR 0x11
 #define LDA 0x12
-#define ADD 0x20
+#define STR 0x20
+#define ADD 0x30
 #define HLT 0xff
