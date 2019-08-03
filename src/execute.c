@@ -50,5 +50,8 @@ void execute(uint32_t instruction) {
     printf("HLT\n");
     running = false;
     break;
+  default:
+    // TODO
+    break;
   }
 }
