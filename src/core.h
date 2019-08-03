@@ -7,9 +7,11 @@
 #define REGISTERS 16
 
 #define NOP 0x00
-#define LDI 0x10
-#define LDR 0x11
-#define LDA 0x12
+#define LDR 0x10
 #define STR 0x20
-#define ADD 0x30
+#define PSH 0x30
+#define POP 0x40
+#define ADD 0x50
+#define SUB 0x60
+#define AND 0x70
 #define HLT 0xff

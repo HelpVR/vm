@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 extern uint32_t mem[ADDRESSES];
-extern uint16_t reg[REGISTERS];
+extern uint32_t reg[REGISTERS];
 
 extern bool running;
 
@@ -20,25 +20,31 @@ void execute(uint32_t instruction) {
   case NOP:
     printf("NOP\n");
     break;
-  case LDI:
-    printf("LDI R%d, %d\n", r1, imm);
-    reg[r1] = imm;
-    break;
   case LDR:
-    printf("LDR R%d, R%d\n", r1, r3);
-    reg[r1] = reg[r3];
-    break;
-  case LDA:
-    printf("LDA R%d, %d\n", r1, imm);
+    printf("LDR R%d, 0x%04x\n", r1, imm);
     reg[r1] = mem[imm];
     break;
   case STR:
-    printf("STR R%d, %d\n", r1, imm);
+    printf("STR R%d, 0x%04x\n", r1, imm);
     mem[imm] = reg[r1];
+    break;
+  case PSH:
+    // TODO
+    break;
+  case POP:
+    // TODO
     break;
   case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
     reg[r1] = reg[r2] + reg[r3];
+    break;
+  case SUB:
+    printf("SUB R%d, R%d, R%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] - reg[r3];
+    break;
+  case AND:
+    printf("AND R%d, R%d, R%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] & reg[r3];
     break;
   case HLT:
     printf("HLT\n");
