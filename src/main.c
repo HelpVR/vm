@@ -9,9 +9,9 @@ uint32_t mem[ADDRESSES]; // Memory
 uint32_t reg[REGISTERS]; // Registers
 uint32_t stack[STACK_SIZE]; // Stack
 
-uint16_t sp; // Stack Pointer
-
 uint16_t iar; // Instruction Address Register
+
+uint16_t sp; // Stack Pointer
 
 uint32_t fetch() { return mem[iar++]; }
 

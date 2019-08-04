@@ -4,11 +4,11 @@
 
 #include <stdio.h>
 
+extern bool running;
+
 extern uint32_t mem[ADDRESSES];
 extern uint32_t reg[REGISTERS];
 extern uint32_t stack[STACK_SIZE];
-
-extern bool running;
 
 extern uint16_t sp;
 
