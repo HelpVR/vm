@@ -6,8 +6,11 @@
 
 extern uint32_t mem[ADDRESSES];
 extern uint32_t reg[REGISTERS];
+extern uint32_t stack[STACK_SIZE];
 
 extern bool running;
+
+extern uint16_t sp;
 
 void execute(uint32_t instruction) {
   uint16_t op = (instruction & 0xff000000) >> 24;
@@ -29,10 +32,12 @@ void execute(uint32_t instruction) {
     mem[imm] = reg[r1];
     break;
   case PSH:
-    // TODO
+    printf("PSH R%d\n",r1);
+    stack[sp++] = reg[r1];
     break;
   case POP:
-    // TODO
+    printf("POP R%d\n",r1);
+    reg[r1] = stack[--sp];
     break;
   case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
