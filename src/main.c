@@ -51,9 +51,7 @@ int main() {
         printf(" ");
       }
     }
-
     printf("STACK: %d\n", sp);
-
     for (uint16_t si = 0; si < STACK_SIZE; si++) {
       printf("[0x%08x]", stack[si]);
       if ((si + 1) % 4 == 0) {
@@ -62,7 +60,6 @@ int main() {
         printf(" ");
       }
     }
-
   }
 
   return 0;
