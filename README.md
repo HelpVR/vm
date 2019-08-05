@@ -17,5 +17,5 @@
   mem[0x3008] = 0xff000000; // HLT
 ```
 
-# Credits
+## Credits
 - Icon made by Roundicons from www.flaticon.com
