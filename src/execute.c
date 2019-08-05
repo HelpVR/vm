@@ -29,9 +29,17 @@ void execute(uint32_t instruction) {
     printf("LDR R%d, 0x%04x\n", r1, imm);
     reg[r1] = mem[imm];
     break;
+  case LDA:
+    printf("LDA 0x%04x\n", imm);
+    acc = mem[imm];
+    break;
   case STR:
     printf("STR R%d, 0x%04x\n", r1, imm);
     mem[imm] = reg[r1];
+    break;
+  case STA:
+    printf("STA 0x%04x\n", imm);
+    mem[imm] = acc;
     break;
   case PSH:
     printf("PSH R%d\n",r1);
