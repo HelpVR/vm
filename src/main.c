@@ -9,6 +9,8 @@ uint32_t mem[ADDRESSES]; // Memory
 uint32_t reg[REGISTERS]; // Registers
 uint32_t stack[STACK_SIZE]; // Stack
 
+uint32_t acc; // Accumulator Register
+
 uint16_t iar; // Instruction Address Register
 
 uint16_t sp; // Stack Pointer

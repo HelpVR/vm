@@ -10,6 +10,8 @@ extern uint32_t mem[ADDRESSES];
 extern uint32_t reg[REGISTERS];
 extern uint32_t stack[STACK_SIZE];
 
+extern uint32_t acc;
+
 extern uint16_t sp;
 
 void execute(uint32_t instruction) {
@@ -41,15 +43,15 @@ void execute(uint32_t instruction) {
     break;
   case ADD:
     printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] + reg[r3];
+    acc = reg[r1] = reg[r2] + reg[r3];
     break;
   case SUB:
     printf("SUB R%d, R%d, R%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] - reg[r3];
+    acc = reg[r1] = reg[r2] - reg[r3];
     break;
   case AND:
     printf("AND R%d, R%d, R%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] & reg[r3];
+    acc = reg[r1] = reg[r2] & reg[r3];
     break;
   case HLT:
     printf("HLT\n");
