@@ -1,4 +1,4 @@
-# vm: work in progress
+![image](https://user-images.githubusercontent.com/1548352/62435938-a37d4380-b746-11e9-9182-47da9c8184a6.png)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/xorz57/vm/badge)](https://www.codefactor.io/repository/github/xorz57/vm)
 
@@ -16,3 +16,6 @@
   mem[0x3007] = 0x40010000; // POP R1
   mem[0x3008] = 0xff000000; // HLT
 ```
+
+# Credits
+- Icon made by Roundicons from www.flaticon.com
