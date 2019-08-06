@@ -57,6 +57,10 @@ void execute(uint32_t instruction) {
     printf("SUB R%d, R%d, R%d\n", r1, r2, r3);
     acc = reg[r1] = reg[r2] - reg[r3];
     break;
+  case MUL:
+    printf("MUL R%d, R%d, R%d\n", r1, r2, r3);
+    acc = reg[r1] = reg[r2] * reg[r3];
+    break;
   case AND:
     printf("AND R%d, R%d, R%d\n", r1, r2, r3);
     acc = reg[r1] = reg[r2] & reg[r3];

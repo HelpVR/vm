@@ -15,7 +15,8 @@ enum Code {
   POP = 0x40,
   ADD = 0x50,
   SUB = 0x60,
-  AND = 0x70,
+  MUL = 0x70,
+  AND = 0x80,
   HLT = 0xff
 };
 
