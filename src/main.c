@@ -9,13 +9,10 @@ uint32_t mem[ADDRESSES];
 uint32_t reg[REGISTERS];
 uint32_t stack[STACK_SIZE];
 
-uint32_t acc; // Accumulator Register
+#define SP reg[13] // Stack Pointer
+#define PC reg[15] // Program Counter
 
-uint16_t iar; // Instruction Address Register
-
-uint16_t sp; // Stack Pointer
-
-uint32_t fetch() { return mem[iar++]; }
+uint32_t fetch() { return mem[PC++]; }
 
 volatile sig_atomic_t signal_status;
 
@@ -30,9 +27,8 @@ int main() {
   mem[0x3003] = 0x20021003; // str r2, 0x1003
   mem[0x3004] = 0xff000000; // halt
 
-  iar = 0x3000;
-
-  sp = 0;
+  SP = 0x0000;
+  PC = 0x3000;
 
   running = true;
 

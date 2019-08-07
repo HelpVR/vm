@@ -25,7 +25,8 @@ extern uint32_t mem[ADDRESSES];
 extern uint32_t reg[REGISTERS];
 extern uint32_t stack[STACK_SIZE];
 
-extern uint16_t sp;
+#define SP reg[13] // Stack Pointer
+#define PC reg[15] // Program Counter
 
 void execute(uint32_t instruction) {
   uint16_t op = (instruction & 0xff000000) >> 24;
@@ -48,11 +49,11 @@ void execute(uint32_t instruction) {
     break;
   case PUSH:
     printf("push r%d\n",r1);
-    stack[sp++] = reg[r1];
+    stack[SP++] = reg[r1];
     break;
   case POP:
     printf("pop r%d\n",r1);
-    reg[r1] = stack[--sp];
+    reg[r1] = stack[--SP];
     break;
   case ADD:
     printf("add r%d, r%d, r%d\n", r1, r2, r3);
