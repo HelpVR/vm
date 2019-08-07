@@ -17,6 +17,8 @@ enum Code {
   AND = 0x90,
   ORR = 0xa0,
   EOR = 0xb0,
+  LSL = 0xc0,
+  LSR = 0xd0,
   HALT = 0xff
 };
 
@@ -32,57 +34,63 @@ extern uint32_t stack[16];
 void execute(uint32_t instruction) {
   uint16_t op = (instruction & 0xff000000) >> 24;
   uint16_t rd = (instruction & 0x00ff0000) >> 16;
-  uint16_t r1 = (instruction & 0x0000ff00) >> 8;
-  uint16_t r2 = (instruction & 0x000000ff);
+  uint16_t rn = (instruction & 0x0000ff00) >> 8;
+  uint16_t rm = (instruction & 0x000000ff);
   uint16_t imm16 = (instruction & 0x000ffff);
 
   switch (op) {
-  case NOP:
+  case NOP: // No Operation
     printf("nop\n");
     break;
-  case MOV:
+  case MOV: // Move
     printf("mov r%d, #%d\n", rd, imm16);
     reg[rd] = imm16;
     break;
-  case LDR:
+  case LDR: // Load
     // TODO
     break;
-  case STR:
+  case STR: // Store
     // TODO
     break;
-  case PUSH:
+  case PUSH: // Push
     printf("push r%d\n",rd);
     stack[SP++] = reg[rd];
     break;
-  case POP:
+  case POP: // Pop
     printf("pop r%d\n",rd);
     reg[rd] = stack[--SP];
     break;
-  case ADD:
-    printf("add r%d, r%d, r%d\n", rd, r1, r2);
-    reg[rd] = reg[r1] + reg[r2];
+  case ADD: // Add
+    printf("add r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] + reg[rm];
     break;
-  case SUB:
-    printf("sub r%d, r%d, r%d\n", rd, r1, r2);
-    reg[rd] = reg[r1] - reg[r2];
+  case SUB: // Subtract
+    printf("sub r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] - reg[rm];
     break;
-  case MUL:
-    printf("mul r%d, r%d, r%d\n", rd, r1, r2);
-    reg[rd] = reg[r1] * reg[r2];
+  case MUL: // Multiply
+    printf("mul r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] * reg[rm];
     break;
-  case AND:
-    printf("and r%d, r%d, r%d\n", rd, r1, r2);
-    reg[rd] = reg[r1] & reg[r2];
+  case AND: // Logical And
+    printf("and r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] & reg[rm];
     break;
-  case ORR:
-    printf("orr r%d, r%d, r%d\n", rd, r1, r2);
-    reg[rd] = reg[r1] | reg[r2];
+  case ORR: // Logical Or
+    printf("orr r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] | reg[rm];
     break;
-  case EOR:
-    printf("eor r%d, r%d, r%d\n", rd, r1, r2);
-    reg[rd] = reg[r1] ^ reg[r2];
+  case EOR: // Exclusive Or
+    printf("eor r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] ^ reg[rm];
     break;
-  case HALT:
+  case LSL: // Logical Shift Left
+    // TODO
+    break;
+  case LSR: // Logical Shift Right
+    // TODO
+    break;
+  case HALT: // Halt
     printf("halt\n");
     running = false;
     break;
