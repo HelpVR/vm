@@ -1,5 +1,6 @@
 ![image](https://user-images.githubusercontent.com/1548352/62435938-a37d4380-b746-11e9-9182-47da9c8184a6.png)
 
+[![Build Status](https://travis-ci.org/xorz57/vm.svg?branch=master)](https://travis-ci.org/xorz57/vm)
 [![CodeFactor](https://www.codefactor.io/repository/github/xorz57/vm/badge)](https://www.codefactor.io/repository/github/xorz57/vm)
 
 ## Example
