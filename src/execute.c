@@ -6,16 +6,17 @@
 
 enum Code {
   NOP = 0x00,
-  LDR = 0x10,
-  STR = 0x20,
-  PUSH = 0x30,
-  POP = 0x40,
-  ADD = 0x50,
-  SUB = 0x60,
-  MUL = 0x70,
-  AND = 0x80,
-  ORR = 0x90,
-  EOR = 0xa0,
+  MOV = 0x10,
+  LDR = 0x20,
+  STR = 0x30,
+  PUSH = 0x40,
+  POP = 0x50,
+  ADD = 0x60,
+  SUB = 0x70,
+  MUL = 0x80,
+  AND = 0x90,
+  ORR = 0xa0,
+  EOR = 0xb0,
   HALT = 0xff
 };
 
@@ -30,54 +31,56 @@ extern uint32_t stack[16];
 
 void execute(uint32_t instruction) {
   uint16_t op = (instruction & 0xff000000) >> 24;
-  uint16_t r1 = (instruction & 0x00ff0000) >> 16;
-  uint16_t r2 = (instruction & 0x0000ff00) >> 8;
-  uint16_t r3 = (instruction & 0x000000ff);
-  uint16_t imm = (instruction & 0x000ffff);
+  uint16_t rd = (instruction & 0x00ff0000) >> 16;
+  uint16_t r1 = (instruction & 0x0000ff00) >> 8;
+  uint16_t r2 = (instruction & 0x000000ff);
+  uint16_t imm16 = (instruction & 0x000ffff);
 
   switch (op) {
   case NOP:
     printf("nop\n");
     break;
+  case MOV:
+    printf("mov r%d, #%d\n", rd, imm16);
+    reg[rd] = imm16;
+    break;
   case LDR:
-    printf("ldr r%d, 0x%04x\n", r1, imm);
-    reg[r1] = mem[imm];
+    // TODO
     break;
   case STR:
-    printf("str r%d, 0x%04x\n", r1, imm);
-    mem[imm] = reg[r1];
+    // TODO
     break;
   case PUSH:
-    printf("push r%d\n",r1);
-    stack[SP++] = reg[r1];
+    printf("push r%d\n",rd);
+    stack[SP++] = reg[rd];
     break;
   case POP:
-    printf("pop r%d\n",r1);
-    reg[r1] = stack[--SP];
+    printf("pop r%d\n",rd);
+    reg[rd] = stack[--SP];
     break;
   case ADD:
-    printf("add r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] + reg[r3];
+    printf("add r%d, r%d, r%d\n", rd, r1, r2);
+    reg[rd] = reg[r1] + reg[r2];
     break;
   case SUB:
-    printf("sub r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] - reg[r3];
+    printf("sub r%d, r%d, r%d\n", rd, r1, r2);
+    reg[rd] = reg[r1] - reg[r2];
     break;
   case MUL:
-    printf("mul r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] * reg[r3];
+    printf("mul r%d, r%d, r%d\n", rd, r1, r2);
+    reg[rd] = reg[r1] * reg[r2];
     break;
   case AND:
-    printf("and r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] & reg[r3];
+    printf("and r%d, r%d, r%d\n", rd, r1, r2);
+    reg[rd] = reg[r1] & reg[r2];
     break;
   case ORR:
-    printf("orr r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] | reg[r3];
+    printf("orr r%d, r%d, r%d\n", rd, r1, r2);
+    reg[rd] = reg[r1] | reg[r2];
     break;
   case EOR:
-    printf("eor r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] ^ reg[r3];
+    printf("eor r%d, r%d, r%d\n", rd, r1, r2);
+    reg[rd] = reg[r1] ^ reg[r2];
     break;
   case HALT:
     printf("halt\n");
