@@ -3,6 +3,20 @@
 [![Build Status](https://travis-ci.org/xorz57/vm.svg?branch=master)](https://travis-ci.org/xorz57/vm)
 [![CodeFactor](https://www.codefactor.io/repository/github/xorz57/vm/badge)](https://www.codefactor.io/repository/github/xorz57/vm)
 
+## Instruction Set
+
+- `mov rd, #imm16`
+- `push rd`
+- `pop rd`
+- `add rd, rn, rm`
+- `sub rd, rn, rm`
+- `and rd, rn, rm`
+- `orr rd, rn, rm`
+- `eor rd, rn, rm`
+- `lsl rd, rn, rm`
+- `lsr rd, rn, rm`
+- `halt`
+
 ## Example 1
 ```c
   mem[0x3000] = 0x10000001; // mov r0, #1

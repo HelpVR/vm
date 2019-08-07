@@ -13,12 +13,11 @@ enum Code {
   POP = 0x50,
   ADD = 0x60,
   SUB = 0x70,
-  MUL = 0x80,
-  AND = 0x90,
-  ORR = 0xa0,
-  EOR = 0xb0,
-  LSL = 0xc0,
-  LSR = 0xd0,
+  AND = 0x80,
+  ORR = 0x90,
+  EOR = 0xa0,
+  LSL = 0xb0,
+  LSR = 0xc0,
   HALT = 0xff
 };
 
@@ -67,10 +66,6 @@ void execute(uint32_t instruction) {
   case SUB: // Subtract
     printf("sub r%d, r%d, r%d\n", rd, rn, rm);
     reg[rd] = reg[rn] - reg[rm];
-    break;
-  case MUL: // Multiply
-    printf("mul r%d, r%d, r%d\n", rd, rn, rm);
-    reg[rd] = reg[rn] * reg[rm];
     break;
   case AND: // Logical And
     printf("and r%d, r%d, r%d\n", rd, rn, rm);
