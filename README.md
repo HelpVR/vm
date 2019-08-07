@@ -3,19 +3,28 @@
 [![Build Status](https://travis-ci.org/xorz57/vm.svg?branch=master)](https://travis-ci.org/xorz57/vm)
 [![CodeFactor](https://www.codefactor.io/repository/github/xorz57/vm/badge)](https://www.codefactor.io/repository/github/xorz57/vm)
 
-## Example
+## Example 1
 ```c
   mem[0x1000] = 0x0000ffff; // 0x0000ffff
   mem[0x1001] = 0x00000001; // 0x00000001
-  mem[0x3000] = 0x10001000; // LDR R0, 0x1000
-  mem[0x3001] = 0x10011001; // LDR R1, 0x1001
-  mem[0x3002] = 0x50020001; // ADD R2, R0, R1
-  mem[0x3003] = 0x20001003; // STR R0, 0x1003
-  mem[0x3004] = 0x30000000; // PSH R0
-  mem[0x3005] = 0x30010000; // PSH R1
-  mem[0x3006] = 0x40000000; // POP R0
-  mem[0x3007] = 0x40010000; // POP R1
-  mem[0x3008] = 0xff000000; // HLT
+  mem[0x3000] = 0x10001000; // ldi r0, 0x1000
+  mem[0x3001] = 0x10011001; // ldi r1, 0x1001
+  mem[0x3002] = 0x50020001; // add r2, r0, r1
+  mem[0x3003] = 0x20001003; // str r0, 0x1003
+  mem[0x3004] = 0xff000000; // halt
+```
+
+## Example 2
+```c
+  mem[0x1000] = 0x0000ffff; // 0x0000ffff
+  mem[0x1001] = 0x00000001; // 0x00000001
+  mem[0x3000] = 0x10001000; // ldi r0, 0x1000
+  mem[0x3001] = 0x10011001; // ldi r1, 0x1001
+  mem[0x3002] = 0x30000000; // push r0
+  mem[0x3003] = 0x30010000; // push r1
+  mem[0x3004] = 0x40000000; // pop r0
+  mem[0x3005] = 0x40010000; // pop r1
+  mem[0x3006] = 0xff000000; // halt
 ```
 
 ## Credits

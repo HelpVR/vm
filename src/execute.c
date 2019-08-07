@@ -4,13 +4,26 @@
 
 #include <stdio.h>
 
+enum Code {
+  NOP = 0x00,
+  LDR = 0x10,
+  STR = 0x20,
+  PUSH = 0x30,
+  POP = 0x40,
+  ADD = 0x50,
+  SUB = 0x60,
+  MUL = 0x70,
+  AND = 0x80,
+  ORR = 0x90,
+  EOR = 0xa0,
+  HALT = 0xff
+};
+
 extern bool running;
 
 extern uint32_t mem[ADDRESSES];
 extern uint32_t reg[REGISTERS];
 extern uint32_t stack[STACK_SIZE];
-
-extern uint32_t acc;
 
 extern uint16_t sp;
 
@@ -23,50 +36,50 @@ void execute(uint32_t instruction) {
 
   switch (op) {
   case NOP:
-    printf("NOP\n");
+    printf("nop\n");
     break;
   case LDR:
-    printf("LDR R%d, 0x%04x\n", r1, imm);
+    printf("ldr r%d, 0x%04x\n", r1, imm);
     reg[r1] = mem[imm];
     break;
-  case LDA:
-    printf("LDA 0x%04x\n", imm);
-    acc = mem[imm];
-    break;
   case STR:
-    printf("STR R%d, 0x%04x\n", r1, imm);
+    printf("str r%d, 0x%04x\n", r1, imm);
     mem[imm] = reg[r1];
     break;
-  case STA:
-    printf("STA 0x%04x\n", imm);
-    mem[imm] = acc;
-    break;
-  case PSH:
-    printf("PSH R%d\n",r1);
+  case PUSH:
+    printf("push r%d\n",r1);
     stack[sp++] = reg[r1];
     break;
   case POP:
-    printf("POP R%d\n",r1);
+    printf("pop r%d\n",r1);
     reg[r1] = stack[--sp];
     break;
   case ADD:
-    printf("ADD R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] + reg[r3];
+    printf("add r%d, r%d, r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] + reg[r3];
     break;
   case SUB:
-    printf("SUB R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] - reg[r3];
+    printf("sub r%d, r%d, r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] - reg[r3];
     break;
   case MUL:
-    printf("MUL R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] * reg[r3];
+    printf("mul r%d, r%d, r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] * reg[r3];
     break;
   case AND:
-    printf("AND R%d, R%d, R%d\n", r1, r2, r3);
-    acc = reg[r1] = reg[r2] & reg[r3];
+    printf("and r%d, r%d, r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] & reg[r3];
     break;
-  case HLT:
-    printf("HLT\n");
+  case ORR:
+    printf("orr r%d, r%d, r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] | reg[r3];
+    break;
+  case EOR:
+    printf("eor r%d, r%d, r%d\n", r1, r2, r3);
+    reg[r1] = reg[r2] ^ reg[r3];
+    break;
+  case HALT:
+    printf("halt\n");
     running = false;
     break;
   default:
