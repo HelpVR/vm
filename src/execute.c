@@ -1,7 +1,7 @@
 #include "execute.h"
 #include "memory.h"
-#include "core.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 
 enum Code {
@@ -21,9 +21,9 @@ enum Code {
 
 extern bool running;
 
-extern uint32_t mem[ADDRESSES];
-extern uint32_t reg[REGISTERS];
-extern uint32_t stack[STACK_SIZE];
+extern uint32_t mem[65536];
+extern uint32_t reg[16];
+extern uint32_t stack[16];
 
 #define SP reg[13] // Stack Pointer
 #define PC reg[15] // Program Counter

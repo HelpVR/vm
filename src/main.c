@@ -1,13 +1,13 @@
-#include "core.h"
 #include "execute.h"
 #include "signal.h"
-#include <stdio.h>
+
+#include <stdbool.h>
 
 bool running;
 
-uint32_t mem[ADDRESSES];
-uint32_t reg[REGISTERS];
-uint32_t stack[STACK_SIZE];
+uint32_t mem[65536];
+uint32_t reg[16];
+uint32_t stack[16];
 
 #define SP reg[13] // Stack Pointer
 #define PC reg[15] // Program Counter
