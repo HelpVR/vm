@@ -80,10 +80,12 @@ void execute(uint32_t instruction) {
     reg[rd] = reg[rn] ^ reg[rm];
     break;
   case LSL: // Logical Shift Left
-    // TODO
+    printf("lsl r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] << reg[rm];
     break;
   case LSR: // Logical Shift Right
-    // TODO
+    printf("lsr r%d, r%d, r%d\n", rd, rn, rm);
+    reg[rd] = reg[rn] >> reg[rm];
     break;
   case HALT: // Halt
     printf("halt\n");
