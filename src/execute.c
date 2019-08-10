@@ -32,9 +32,9 @@ extern uint32_t stack[16];
 void execute(uint32_t instruction) {
   uint16_t op = (instruction & 0xff000000) >> 24;
 
-  uint16_t r1 = (instruction & 0x00ff0000) >> 16;
-  uint16_t r2 = (instruction & 0x0000ff00) >> 8;
-  uint16_t r3 = (instruction & 0x000000ff);
+  uint16_t ra = (instruction & 0x00ff0000) >> 16;
+  uint16_t rb = (instruction & 0x0000ff00) >> 8;
+  uint16_t rc = (instruction & 0x000000ff);
 
   uint16_t imm16 = (instruction & 0x0000ffff);
   uint16_t imm8  = (instruction & 0x000000ff);
@@ -44,52 +44,52 @@ void execute(uint32_t instruction) {
     printf("nop\n");
     break;
   case MOV: // Move
-    printf("mov r%d, #%d\n", r1, imm8);
-    reg[r1] = imm8;
+    printf("mov r%d, #%d\n", ra, imm8);
+    reg[ra] = imm8;
     break;
   case LDR: // Load
-    printf("ldr r%d, [r%d]\n", r1, r3);
-    reg[r1] = memory[reg[r3]];
+    printf("ldr r%d, [r%d]\n", ra, rc);
+    reg[ra] = memory[reg[rc]];
     break;
   case STR: // Store
-    printf("str r%d, [r%d]\n", r1, r3);
-    memory[reg[r3]] = reg[r1];
+    printf("str r%d, [r%d]\n", ra, rc);
+    memory[reg[rc]] = reg[ra];
     break;
   case PUSH: // Push
-    printf("push r%d\n",r1);
-    stack[SP++] = reg[r1];
+    printf("push r%d\n",ra);
+    stack[SP++] = reg[ra];
     break;
   case POP: // Pop
-    printf("pop r%d\n",r1);
-    reg[r1] = stack[--SP];
+    printf("pop r%d\n",ra);
+    reg[ra] = stack[--SP];
     break;
   case ADD: // Add
-    printf("add r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] + reg[r3];
+    printf("add r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] + reg[rc];
     break;
   case SUB: // Subtract
-    printf("sub r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] - reg[r3];
+    printf("sub r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] - reg[rc];
     break;
   case AND: // Logical And
-    printf("and r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] & reg[r3];
+    printf("and r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] & reg[rc];
     break;
   case ORR: // Logical Or
-    printf("orr r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] | reg[r3];
+    printf("orr r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] | reg[rc];
     break;
   case EOR: // Exclusive Or
-    printf("eor r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] ^ reg[r3];
+    printf("eor r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] ^ reg[rc];
     break;
   case LSL: // Logical Shift Left
-    printf("lsl r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] << reg[r3];
+    printf("lsl r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] << reg[rc];
     break;
   case LSR: // Logical Shift Right
-    printf("lsr r%d, r%d, r%d\n", r1, r2, r3);
-    reg[r1] = reg[r2] >> reg[r3];
+    printf("lsr r%d, r%d, r%d\n", ra, rb, rc);
+    reg[ra] = reg[rb] >> reg[rc];
     break;
   case HALT: // Halt
     printf("halt\n");
